@@ -1,0 +1,3 @@
+chatApp.controller("loginController", [function (){
+
+}]);

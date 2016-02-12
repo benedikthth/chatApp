@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body ng-app="chatApp">
+    <span><a href="#/home">Home</a></span> <span><a href="#/home/login">Login</a></span>
+
+    <div ng-view>
+      <!-- herein where there lies the app! -->
+    </div>
+    <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+    <script src="bower_components/angular-route/angular-route.min.js" charset="utf-8"></script>
+    <script src="bower_components/socket.io-client/socket.io.js" charset="utf-8"></script>
+    <script src="build/app.min.js" charset="utf-8"></script>
+
+    </script>
+  </body>
+</html>

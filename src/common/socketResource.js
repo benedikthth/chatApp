@@ -1,7 +1,8 @@
-  angular.module("chatApp").factory("socketResource",
+/*chatApp.factory("socketResource",
   function socketResource(){
     var socket = io.connect();
     return {
-      
+      on: function(event, callback){}
     };
   });
+*/
