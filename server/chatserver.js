@@ -4,7 +4,7 @@ app = express(),
 http = require('http'),
 server = http.createServer(app),
 io = require('socket.io').listen(server);
-/* fix the 'no "access-control-allow-origin" header crap' */ 
+/* fix the 'no "access-control-allow-origin" header crap' */
 io.set( 'origins', '*localhost*:*' );
 server.listen(8080);
 
@@ -13,8 +13,6 @@ server.listen(8080);
 var rooms = {};
 //Global user object, since we want to know what rooms each user is in etc.
 var users = {};
-
-//reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
 //Default room.
 rooms.lobby = new Room();
