@@ -1,5 +1,6 @@
 <ul>
-  <li ng-repeat="name in names">
-  {{name}} is a not retard
+  <li ng-repeat="room in roomList">
+    {{room.topic}}
+    <button type="button" ng-click="join(room)"></button>
   </li>
 </ul>
