@@ -1,8 +1,14 @@
-chatApp.controller("loginController", ['$scope', 'socket', function ($scope, socket){
+chatApp.controller("loginController", ['$location' ,'$scope', 'socket', function ($location ,$scope, socket){
   $scope.user = {
     name: ''
   };
   $scope.login = function(){
-    console.log('wank');
+    console.log($scope.user.name);
+    socket.emit('adduser' , $scope.user.name );
+    socket.emit('users');
+    socket.on('userlist', function(userlist,fn){
+    console.log(userlist);
+    $location.url('/home/roomlist');
+  });
   };
 }]);
