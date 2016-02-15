@@ -9,12 +9,8 @@
 7. start a http server
 8. ???
 9. profit
-
-''
-reeeeeeeeeeeeeeeeeeeeee
-reeeeeeeeeeeeeeeeeeeeeere
-reeeeeeeeeeeeeeeeeeeeeere
-rererere
-reeeeeeeeee
-
-''
+## How to Set up server for WEBSOCKET AWESOMENESS!
+1. $ cd server/
+2. $ npm install (it's good to fucking make the fuck sure you're using a recent fucking version of fucking socket.io)
+3. ????
+4. fucking porrrrrrrrrrfgit
