@@ -1,5 +1,8 @@
 chatApp.controller("loginController", ['$scope', 'socket', function ($scope, socket){
+  $scope.user = {
+    name: ''
+  };
   $scope.login = function(){
-    console.log($scope.user.id);
+    console.log('wank');
   };
 }]);
