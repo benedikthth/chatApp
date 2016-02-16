@@ -1,12 +1,17 @@
-chatApp.controller("loginController", ['$location' ,'$scope', 'socket', function ($location ,$scope, socket){
+chatApp.controller("loginController", ['user', '$location' ,'$scope', 'socket', function ($location ,$scope, socket){
   $scope.user = {
     name: ''
   };
   $scope.login = function(){
+    if($scope.user.name == '' || $scope.user.name.length < 3 ){
+      $scope.user.name = '';
+      return;
+    }
     socket.emit('adduser' , $scope.user.name, function(available){
       if(!available){
         $scope.user.name = '';
       } else {
+        user.username = $scope.user.name;
         $location.url('/home/roomlist');
       }
     });

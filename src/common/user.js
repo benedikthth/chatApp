@@ -1,0 +1,3 @@
+chatApp.value('user', {
+  username : ''
+});
