@@ -9,7 +9,6 @@ chatApp.controller('roomListController', ['$location' , '$scope', 'socket', func
       data[Object.keys(data)[i]].name = Object.keys(data)[i];
       //console.log(data[Object.keys(data)[i]].name);
     }
-    //console.log(data.name);
     $scope.roomList = data;
   });
 
