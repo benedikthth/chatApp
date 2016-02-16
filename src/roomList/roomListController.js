@@ -18,6 +18,7 @@ chatApp.controller('roomListController', ['$location' , '$scope', 'socket', func
         console.log('could not connect because :' + reason);
       } else {
         console.log('you are connected to el '+ rm.name);
+        $location.url('home/room/'+rm.name);
       }
     });
   };
