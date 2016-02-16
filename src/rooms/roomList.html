@@ -1,6 +1,11 @@
-<ul>
-  <li ng-repeat="room in roomList">
-    {{room.topic}}
-    <button type="button" ng-click="join(room)"></button>
-  </li>
-</ul>
+<div>
+  <ul>
+    <li ng-repeat="room in roomList">
+      {{room.topic}}
+      <input value="join" type="button" ng-click="join(room)"></input>
+    </li>
+  </ul>
+  <form>
+  <input type='button' value='Create a new room' ng-click="createRoom()"></input>
+</form>
+</div>
