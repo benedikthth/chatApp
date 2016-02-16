@@ -1,4 +1,4 @@
-chatApp.controller("loginController", ['user', '$location' ,'$scope', 'socket', function ($location ,$scope, socket){
+chatApp.controller("loginController", ['user', '$location' ,'$scope', 'socket', function (user, $location ,$scope, socket){
   $scope.user = {
     name: ''
   };
