@@ -18,5 +18,9 @@ chatApp.config(['$routeProvider', function($routeProvider){
     templateUrl : 'src/newRoom/newRoom.html',
     controller: 'newRoomController'
   }).
+  when('/home/room/:id', {
+    templateUrl : 'src/room/room.html',
+    controller : 'roomController'
+  }).
   otherwise({ redirectTo: '/home/login' });
 }]);

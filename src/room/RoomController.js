@@ -1,2 +1,3 @@
-chatApp.controller('roomController', ['$location', '$scope', 'socket', function($location ,$scope, socket){
+chatApp.controller('roomController', ['$routeParams', '$location', '$scope', 'socket', function($routeParams, $location ,$scope, socket){
+  console.log($routeParams.id);
 }]);
