@@ -1,5 +1,5 @@
 var chatApp = angular.module("chatApp", ['ngRoute']);
-
+console.log('this is neccecary');
 chatApp.config(['$routeProvider', function($routeProvider){
   $routeProvider.
   when('/home', {
