@@ -14,6 +14,8 @@ var rooms = {};
 //Global user object, since we want to know what rooms each user is in etc.
 var users = {};
 
+
+
 //Default room.
 rooms.lobby = new Room();
 rooms.lobby.setTopic("Welcome to the lobby!");
