@@ -1,18 +1,18 @@
 chatApp.controller('newRoomController', ['$location', '$scope', 'socket', function($location ,$scope, socket){
   $scope.newRoom={
-    name : '',
+    room : '',
     topic : '',
     pass: ''
   };
-  $scope.create = function(newRm){
-    var rm = {
-      name :newRm.name,
-      topic : newRm.topic,
-    };
+  $scope.create = function(){
     var joinObj = {
-      room : rm,
-      pass : newRm.pass,
+      room : $scope.newRoom.room,
+      topic : $scope.newRoom.topic,
+      pass : $scope.newRoom.pass,
     };
+    if(joinObj.pass === ''){
+      joinObj.pass = undefined;
+    }
     console.log(joinObj);
     socket.emit('joinroom' , joinObj ,function(available){
       if(available){

@@ -50,13 +50,13 @@ io.sockets.on('connection', function (socket) {
 			rooms[room] = new Room();
 			//Op the user if he creates the room.
 			rooms[room].ops[socket.username] = socket.username;
-			rooms[room].topic = joinObj.room.topic;
 			//If the user wants to password protect the room we set the password.
 			if(pass !== undefined) {
 				rooms[room].setPassword(pass);
 			}
 			//Keep track of the room in the user object.
 			users[socket.username].channels[room] = room;
+			rooms[room].setTopic(joinObj.topic);
 			//Send the room information to the client.
 			fn(true);
 			io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
