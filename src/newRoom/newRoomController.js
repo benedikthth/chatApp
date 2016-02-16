@@ -5,10 +5,18 @@ chatApp.controller('roomController', ['$location', '$scope', 'socket', function(
     pass: ''
   };
   $scope.create = function(newRm){
+    var rm = {
+      name :' ',
+      topic :' ',
+    };
+    var joinObj = {
+      room : rm,
+      pass : '',
+    };
     socket.emit('joinroom' , newRm ,function(available){
       if(available){
-        //needed to implement the page for single room
-        $location.Url('');
+        //just a teporary redirect untill specific room pages are implemented
+        $location.url('/home/roomlist');
       }
     });
   };

@@ -11,12 +11,12 @@ chatApp.config(['$routeProvider', function($routeProvider){
     controller: 'loginController'
   }).
   when('/home/roomlist', {
-    templateUrl: 'src/rooms/roomList.html',
+    templateUrl: 'src/roomList/roomList.html',
     controller: 'roomListController'
   }).
   when('/home/room/new', {
-    templateUrl : 'src/rooms/newRoom.html',
-    controller: 'newroomController'
+    templateUrl : 'src/newRoom/newRoom.html',
+    controller: 'newRoomController'
   }).
   otherwise({ redirectTo: '/home/login' });
 }]);
