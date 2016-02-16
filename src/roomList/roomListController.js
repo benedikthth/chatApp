@@ -13,11 +13,11 @@ chatApp.controller('roomListController', ['$location' , '$scope', 'socket', func
   });
 
   $scope.join = function(rm){
-    socket.emit('joinroom', {room: rm, pass:null}, function(success, reason){
+    socket.emit('joinroom', {room: rm.name, pass:null}, function(success, reason){
       if(!success){
         console.log('could not connect because :' + reason);
       } else {
-        console.log('you are connected to the ' + rm.topic +' room!');
+        console.log('you are connected to el '+ rm.name);
       }
     });
   };
