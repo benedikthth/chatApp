@@ -1,4 +1,4 @@
-chatApp.controller('roomController', ['$location', '$scope', 'socket', function($location ,$scope, socket){
+chatApp.controller('newRoomController', ['$location', '$scope', 'socket', function($location ,$scope, socket){
   $scope.newRoom={
     name : '',
     topic : '',
