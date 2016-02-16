@@ -6,15 +6,17 @@ chatApp.controller('newRoomController', ['$location', '$scope', 'socket', functi
   };
   $scope.create = function(newRm){
     var rm = {
-      name :' ',
-      topic :' ',
+      name :newRm.name,
+      topic : newRm.topic,
     };
     var joinObj = {
       room : rm,
-      pass : '',
+      pass : newRm.pass,
     };
-    socket.emit('joinroom' , newRm ,function(available){
+    console.log(joinObj);
+    socket.emit('joinroom' , joinObj ,function(available){
       if(available){
+        console.log('tits work');
         //just a teporary redirect untill specific room pages are implemented
         $location.url('/home/roomlist');
       }
