@@ -2,9 +2,22 @@
   <h2>
     {{roomName}}
   </h2>
-  <div class="">
+  <div>
     <ul>
       <li ng-repeat="user in room.userList">{{user}}</li>
     </ul>
+  </div>
+  <div>
+    <p>
+      Messages!
+    </p>
+    <p ng-repeat="message in messages">
+      <b>{{message.nick}}</b> {{message.message}} <i>{{message.timestamp}}</i>
+    </p>
+  </div>
+
+  <div>
+    <input type="text" name="name" ng-model="message" placeholder="Eat a dick please">
+    <button type="button" ng-click="sendMessage()" name="button">Send</button>
   </div>
 </div>

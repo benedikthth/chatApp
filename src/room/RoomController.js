@@ -4,17 +4,32 @@ function(user, $routeParams, $location ,$scope, socket){
   if(!user.isLogged){
     $location.url('/login');
   }
+  $scope.messages = {};
+  $scope.newMessage = '';
   $scope.room = {};
+  //Request to join room
   socket.emit('joinroom', { room: $routeParams.id, pass:'' }, function(success, reason){
     if(!success){
       alert('unable to join room because : ' + reason);
       $location.url('/roomlist');
     } else {
-      console.log('you are connected to el '+ $routeParams.id);
+      //success!
       $scope.roomName = $routeParams.id;
-      user.room = $routeParams.id;
+      //now that we're in. set a listener on location change.
+      //automatically emit a 'part' when url changes from room/xxx
+      $scope.$on('$routeChangeSuccess', function(event, next, current) {
+        socket.emit('partroom', $scope.roomName);
+      });
     }
   });
+
+  $scope.sendMessage = function(){
+    if($scope.message !== ''){
+      socket.emit('sendmsg', {roomName: $scope.roomName, msg: $scope.message});
+      $scope.message = '';
+    }
+  };
+
   /* socket ons */
   socket.on('updateusers', function(roomName, userList, ops) {
     if(roomName === $scope.roomName){
@@ -27,16 +42,17 @@ function(user, $routeParams, $location ,$scope, socket){
     if($scope.roomName === room){
       //message is not meant for this room.
       $scope.messages = messageHistory;
-      return;
     }
   });
   socket.on('updatetopic', function(room, topic, username){
     if($scope.roomName === room){
       //message is meant for this room.
       $scope.topic = topic;
-      console.log(username);
     }
   });
+
+
+  /* */
 
   socket.on('servermessage', function(type, room, username){
     if(room === $scope.roomName){
@@ -53,8 +69,5 @@ function(user, $routeParams, $location ,$scope, socket){
       }
     }
   });
-  //automatically emit a 'part' when url changes from room/xxx
-  $scope.$on('$routeChangeSuccess', function(event, next, current) {
-      socket.emit('partroom', $scope.roomName);
-  });
+
 }]);
