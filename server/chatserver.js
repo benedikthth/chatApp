@@ -56,7 +56,6 @@ io.sockets.on('connection', function (socket) {
 			}
 			//Keep track of the room in the user object.
 			users[socket.username].channels[room] = room;
-			rooms[room].setTopic(joinObj.topic);
 			//Send the room information to the client.
 			fn(true);
 			io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
@@ -93,6 +92,7 @@ io.sockets.on('connection', function (socket) {
 				//Keep track of the room in the user object.
 				users[socket.username].channels[room] = room;
 				//Send the room information to the client.
+				//todo: dont emit to EVERY socket in existence. just those that are in rooms, maybe
 				io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
 				socket.emit('updatechat', room, rooms[room].messageHistory);
 				socket.emit('updatetopic', room, rooms[room].topic, socket.username);
