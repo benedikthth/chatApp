@@ -4,6 +4,14 @@ function(user, $routeParams, $location ,$scope, socket){
   if(!user.isLogged){
     $location.url('/login');
   }
+
+  $scope.messageBox = document.getElementById('messageBox');
+  $scope.$watch(function(){
+    return $scope.messageBox.scrollHeight;
+  }, function(){
+    $scope.messageBox.scrollTop = $scope.messageBox.scrollHeight;
+  });
+
   $scope.messages = {};
   $scope.newMessage = '';
   $scope.room = {};
@@ -22,7 +30,8 @@ function(user, $routeParams, $location ,$scope, socket){
       });
     }
   });
-
+  /* Element.
+  */
   $scope.sendMessage = function(){
     if($scope.message !== ''){
       socket.emit('sendmsg', {roomName: $scope.roomName, msg: $scope.message});
