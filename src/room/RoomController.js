@@ -1,4 +1,6 @@
-chatApp.controller('roomController', ['user', '$routeParams', '$location', '$scope', 'socket', function(user, $routeParams, $location ,$scope, socket){
+chatApp.controller('roomController', ['user', '$routeParams',
+  '$location', '$scope', 'socket',
+function(user, $routeParams, $location ,$scope, socket){
   if(!user.isLogged){
     $location.url('/login');
   }
@@ -13,14 +15,13 @@ chatApp.controller('roomController', ['user', '$routeParams', '$location', '$sco
       user.room = $routeParams.id;
     }
   });
+  /* socket ons */
   socket.on('updateusers', function(roomName, userList, ops) {
     if(roomName === $scope.roomName){
       //message is meant for this rooms....?
       $scope.room.userList = userList;
       $scope.room.ops = ops;
-
     }
-
   });
   socket.on('updatechat', function(room, messageHistory){
     if($scope.roomName === room){
@@ -35,5 +36,25 @@ chatApp.controller('roomController', ['user', '$routeParams', '$location', '$sco
       $scope.topic = topic;
       console.log(username);
     }
+  });
+
+  socket.on('servermessage', function(type, room, username){
+    if(room === $scope.roomName){
+      switch(type){
+        case 'part':
+          //todo: Inform Users that {{username}} has left.
+          break;
+        case 'join':
+          //todo: inform users that {{username}} has joined
+          break;
+        default:
+          console.log('wat');
+          break;
+      }
+    }
+  });
+  //automatically emit a 'part' when url changes from room/xxx
+  $scope.$on('$routeChangeSuccess', function(event, next, current) {
+      socket.emit('partroom', $scope.roomName);
   });
 }]);

@@ -4,10 +4,6 @@ chatApp.controller('roomListController', ['user', '$location' , '$scope', 'socke
   if( !user.isLogged ){
     $location.url('/login');
   }
-  if( user.room !== '' ){
-    socket.emit('partRoom', user.room);
-    user.room = '';
-  }
   $scope.user = user.username;
   socket.emit('rooms');
   //get roomList.
