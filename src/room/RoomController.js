@@ -38,7 +38,19 @@ function(user, $routeParams, $location ,$scope, socket){
       $scope.message = '';
     }
   };
-
+  /* op functions */
+  $scope.kickUser = function(userName){
+    var kickObj = {
+      user : $scope.kickName ,
+      room : $scope.roomName
+    };
+    socket.emit('kickuser', kickObj , function(accepted){
+      if(accepted){
+        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: kickName + ' has been kicked form from this room by ' + user});
+        $scope.kickName = '';
+      }
+    });
+  };
   /* socket ons */
   socket.on('updateusers', function(roomName, userList, ops) {
     if(roomName === $scope.roomName){
@@ -78,5 +90,4 @@ function(user, $routeParams, $location ,$scope, socket){
       }
     }
   });
-
 }]);
