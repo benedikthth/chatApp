@@ -16,9 +16,8 @@ chatApp.controller('newRoomController', ['$location', '$scope', 'socket', functi
     console.log(joinObj);
     socket.emit('joinroom' , joinObj ,function(available){
       if(available){
-        console.log('tits work');
         //just a teporary redirect untill specific room pages are implemented
-        $location.url('/roomlist');
+        $location.url('/room/'+joinObj.room);
       }
     });
   };
