@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="shortcut icon" href="favico.png">
+    <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body ng-app="chatApp">
     <span> <a href="#">Home</a></span>
@@ -12,7 +13,7 @@
     <div ng-view>
       <!-- herein where there lies the app! -->
     </div>
-    <!-- fokk this -->
+    <!-- todo:minify? -->
     <script src="bower_components/angular/angular.js" charset="utf-8"></script>
     <script src="bower_components/angular-route/angular-route.min.js" charset="utf-8"></script>
     <script src="bower_components/socket.io-client/socket.io.js" charset="utf-8"></script>
