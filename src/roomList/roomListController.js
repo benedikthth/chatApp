@@ -1,6 +1,5 @@
 chatApp.controller('roomListController', ['user', '$location' , '$scope', 'socket', function(user, $location ,$scope, socket){
   //request rooms!
-  console.log(user);
   if( !user.isLogged ){
     $location.url('/login');
   }
