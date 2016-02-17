@@ -62,6 +62,7 @@ io.sockets.on('connection', function (socket) {
 			//Update topic
 			socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 			io.sockets.emit('servermessage', "join", room, socket.username);
+			io.sockets.emit('roomlist', rooms);
 		}
 		else {
 
@@ -163,7 +164,7 @@ io.sockets.on('connection', function (socket) {
 				io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
 			}
 
-			//CHANGED: made a new serverMessage Type... i just did ok dont ask
+			//CHANGED: made a new serverMessage Type... i just did ok, dont ask
 			//Broadcast the the user has left the channels he was in.
 			io.sockets.emit('serverQmessage', "quit", users[socket.username].channels, socket.username);
 			//Remove the user from the global user roster.
