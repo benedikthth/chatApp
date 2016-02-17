@@ -1,5 +1,4 @@
 chatApp.value('user', {
   username : '',
-  isLogged : false,
-  room : ''
+  isLogged : false
 });
