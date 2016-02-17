@@ -6,21 +6,21 @@ chatApp.config(['$routeProvider', function($routeProvider){
     templateUrl: 'src/home/home.html',
     controller: 'homeController'
   }).
-  when( '/home/login', {
+  when( '/login', {
     templateUrl: 'src/login/login.html',
     controller: 'loginController'
   }).
-  when('/home/roomlist', {
+  when('/roomlist', {
     templateUrl: 'src/roomList/roomList.html',
     controller: 'roomListController'
   }).
-  when('/home/room/new', {
+  when('/room/new', {
     templateUrl : 'src/newRoom/newRoom.html',
     controller: 'newRoomController'
   }).
-  when('/home/room/:id', {
+  when('/room/:id', {
     templateUrl : 'src/room/room.html',
     controller : 'roomController'
   }).
-  otherwise({ redirectTo: '/home/login' });
+  otherwise({ redirectTo: '/login' });
 }]);
