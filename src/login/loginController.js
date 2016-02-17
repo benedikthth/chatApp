@@ -2,7 +2,6 @@ chatApp.controller("loginController", ['user', '$location' ,'$scope', 'socket', 
   $scope.user = {
     name: ''
   };
-  console.log(user);
   $scope.login = function(){
     //Do not permit empty string or strings with less than 3 chars as usernames
     if($scope.user.name === '' || $scope.user.name.length < 3 ){
