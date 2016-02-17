@@ -18,7 +18,7 @@ chatApp.controller('newRoomController', ['$location', '$scope', 'socket', functi
       if(available){
         console.log('tits work');
         //just a teporary redirect untill specific room pages are implemented
-        $location.url('/home/roomlist');
+        $location.url('/roomlist');
       }
     });
   };
