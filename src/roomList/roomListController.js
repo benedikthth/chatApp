@@ -1,30 +1,30 @@
-chatApp.controller('roomListController', ['$location' , '$scope', 'socket', function($location ,$scope, socket){
+chatApp.controller('roomListController', ['user', '$location' , '$scope', 'socket', function(user, $location ,$scope, socket){
   //request rooms!
+  console.log(user);
+  if( !user.isLogged ){
+    $location.url('/login');
+  }
+  if( user.room !== '' ){
+    socket.emit('partRoom', user.room);
+    user.room = '';
+  }
+  $scope.user = user.username;
   socket.emit('rooms');
   //get roomList.
   socket.on('roomlist', function(data){
-    //why???
-    for (var i = 0; i < Object.keys(data).length; i++) {
-      //oh god so ugly
-      data[Object.keys(data)[i]].name = Object.keys(data)[i];
-      console.log(data[Object.keys(data)[i]]);
+    var keys = Object.keys(data);
+    for (var i = 0; i < keys.length; i++) {
+      data[keys[i]].name = keys[i];
     }
     $scope.roomList = data;
   });
 
   $scope.join = function(rm){
-    socket.emit('joinroom', {room: rm.name, pass:null}, function(success, reason){
-      if(!success){
-        console.log('could not connect because :' + reason);
-      } else {
-        console.log('you are connected to el '+ rm.name);
-        $location.url('home/room/'+rm.name);
-      }
-    });
+    $location.url('/room/'+rm);
   };
 
   $scope.createRoom = function(){
-    $location.url('/home/room/new');
+    $location.url('/room/new');
   };
 
 }]);

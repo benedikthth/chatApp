@@ -1,8 +1,8 @@
 <div>
   <ul>
     <li ng-repeat="room in roomList">
-      {{room.topic}}
-      <input value="join" type="button" ng-click="join(room)"></input>
+      {{room.name}}
+      <input value="join" type="button" ng-click="join(room.name)"></input>
     </li>
   </ul>
   <form>
