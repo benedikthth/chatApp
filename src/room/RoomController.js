@@ -39,15 +39,69 @@ function(user, $routeParams, $location ,$scope, socket){
     }
   };
   /* op functions */
+  /* op function Kick user*/
   $scope.kickUser = function(userName){
-    var kickObj = {
-      user : $scope.kickName ,
+      var kickObj = {
+        user : userName ,
+        room : $scope.roomName
+      };
+      socket.emit('kickuser', kickObj , function(accepted){
+        if(accepted){
+          socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: $scope.kickName + ' has been kicked from from this room by ' + user});
+          $scope.kickName = '';
+        }
+      });
+  };
+  /* op function to ban user*/
+  $scope.banUser = function(userName){
+    var banObj = {
+      user: userName,
       room : $scope.roomName
     };
-    socket.emit('kickuser', kickObj , function(accepted){
+    socket.emit('banuser', banObj, function(accepted){
       if(accepted){
-        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: kickName + ' has been kicked form from this room by ' + user});
-        $scope.kickName = '';
+        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: $scope.banName + ' has been banned from from this room by ' + user});
+        $scope.banName = '';
+      }
+    });
+  };
+  /* op function to unban user*/
+  $scope.unbanUser = function(userName){
+    var unbanobj =    {
+      user :userName,
+      room : $scope.roomName
+    };
+    socket.emit('unbanuser', unbanobj , function(accepted){
+      if(accepted){
+        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: $scope.unbanName + ' has been unbanned from from this room by ' + user});
+        $scope.unbanName = '';
+      }
+    });
+  };
+  /* op function to op user*/
+  $scope.opUser = function(userName){
+      var opobj = {
+        user: userName,
+        room : $scope.roomName
+      };
+      socket.emit('op', opobj , function(accepted){
+          if(accepted){
+            ///
+            /*TODO: send private message to the user that was oped*/
+            ///
+          }
+      });
+  };
+  $scope.deop = function(userName){
+    var deopobj = {
+      name : userName,
+      room : $scope.roomName
+    };
+    socket.emit('deop' , deopobj , function(accepted){
+      if(accepted){
+        //
+        // TODO semd pirvate message to the user who was deoped
+        //
       }
     });
   };
