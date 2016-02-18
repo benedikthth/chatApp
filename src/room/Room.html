@@ -7,7 +7,7 @@
     <div class="col-xs-2">
       <h3>Users</h3>
       <ul>
-        <li ng-repeat="user in room.userList">{{user}}</li>
+        <li ng-repeat="user in room.userList"><intput type="button" value="Op user" ng-click="opUser(user)"></input><input type="button" value="Kick user" ng-click="kickUser(user)"></input><input type="button" value="ban user" ng-click="banUser(user)"> </input>{{user}}</li>
       </ul>
     </div>
       <div class="col-md-6">

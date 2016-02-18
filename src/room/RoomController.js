@@ -47,21 +47,25 @@ function(user, $routeParams, $location ,$scope, socket){
       };
       socket.emit('kickuser', kickObj , function(accepted){
         if(accepted){
-          socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: $scope.kickName + ' has been kicked from from this room by ' + user});
-          $scope.kickName = '';
+          socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: userName+ ' has been kicked from from this room by ' + user});
         }
       });
   };
   /* op function to ban user*/
   $scope.banUser = function(userName){
+    console.log("got in the function");
     var banObj = {
       user: userName,
       room : $scope.roomName
     };
-    socket.emit('banuser', banObj, function(accepted){
+    console.log(banObj);
+    socket.emit('ban', banObj, function(accepted){
       if(accepted){
-        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: $scope.banName + ' has been banned from from this room by ' + user});
-        $scope.banName = '';
+        console.log("socket emited and was accepted");
+        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: userName + ' has been banned from from this room by ' + user});
+      }
+      else{
+        console.log("not accepted");
       }
     });
   };
@@ -73,8 +77,7 @@ function(user, $routeParams, $location ,$scope, socket){
     };
     socket.emit('unbanuser', unbanobj , function(accepted){
       if(accepted){
-        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: $scope.unbanName + ' has been unbanned from from this room by ' + user});
-        $scope.unbanName = '';
+        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg:userName + ' has been unbanned from from this room by ' + user});
       }
     });
   };
@@ -125,7 +128,12 @@ function(user, $routeParams, $location ,$scope, socket){
       $scope.topic = topic;
     }
   });
-
+  socket.on('banned' , function(room , banName , opName){
+  //  console.log(" banName " + banName + " user: " + user.username);
+    if(user.username == banName){
+      $location.url('/roomlist');
+    }
+  });
 
   /* */
 
