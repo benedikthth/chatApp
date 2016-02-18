@@ -1,5 +1,6 @@
 chatApp.controller("loginController", ['user', '$location' ,'$scope', 'socket', function (user, $location ,$scope, socket){
   if(user.isLogged){
+    //You are not permitted to log in after logging in, that makes no sense
     $location.url('/roomlist');
   }
   $scope.user = {
