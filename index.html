@@ -3,14 +3,14 @@
   <head>
     <link rel="shortcut icon" href="favico.png">
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
   </head>
   <body ng-app="chatApp">
     <span> <a href="#">Home</a></span>
     <span> <a href="#/login">Login</a></span>
-    <span> <a href="#/roomlist">List</a></span>
+    <span> <a href="#/roomlist">List</a
 
-
-    <div ng-view>
+    <div><ng-view></ng-view>
       <!-- herein where there lies the app! -->
     </div>
     <!-- todo:minify? -->
@@ -19,6 +19,5 @@
     <script src="bower_components/socket.io-client/socket.io.js" charset="utf-8"></script>
     <script src="build/app.min.js" charset="utf-8"></script>
 
-    </script>
   </body>
 </html>
