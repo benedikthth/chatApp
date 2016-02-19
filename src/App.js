@@ -1,10 +1,6 @@
 var chatApp = angular.module("chatApp", ['ngRoute']);
 chatApp.config(['$routeProvider', function($routeProvider){
   $routeProvider.
-  when('/home', {
-    templateUrl: 'src/home/home.html',
-    controller: 'homeController'
-  }).
   when( '/login', {
     templateUrl: 'src/login/login.html',
     controller: 'loginController'
