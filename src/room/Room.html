@@ -1,13 +1,25 @@
 <div class="container">
   <h2>
-    {{roomName}}
+    {{roomName}} :
+    <p class="text-right">
+      You are connected as user : {{me}}
+    </p>
   </h2>
   <div class="row">
 
     <div class="col-xs-2">
       <h3>Users</h3>
       <ul>
-        <li ng-repeat="user in room.userList"><intput type="button" value="Op user" ng-click="opUser(user)"></input><input type="button" value="Kick user" ng-click="kickUser(user)"></input><input type="button" value="ban user" ng-click="banUser(user)"> </input>{{user}}</li>
+        <li ng-repeat="chatter in room.userList">
+          {{chatter}}
+          <div ng-if="canKickOrBan(chatter)">
+            <i class="fa fa-ban" ng-click="kickUser(chatter)"></i></input>
+            <!--
+            <input type="button" value="ban user" ng-click="banUser(chatter)"> </input>
+            <intput type="button" value="Op user" ng-click="opUser(chatter)"></input>
+            -->
+          </div>
+        </li>
       </ul>
     </div>
       <div class="col-md-6">
@@ -19,7 +31,7 @@
           <div ng-repeat="message in messages">
             <p>
               <strong>{{message.nick}} :</strong>
-              <i class="text-right">{{message.timestamp}}</i>
+              <p class="text-right">{{message.timestamp}}</p>
             </p>
             <blockquote>
               {{message.message}}
@@ -28,10 +40,13 @@
         </div>
       </div>
       <div>
-        <input type="text" name="name" ng-model="message" placeholder="Eat a dick please">
+        <input type="text" name="name" ng-model="message" placeholder="Write A messsage!">
         <button type="button" ng-click="sendMessage()" name="button">Send</button>
       </div>
-
+        <div ng-if="userIsOp(me)">
+          <!-- TODO: implement unbanning user! -->
+          <input type="text" name="name" ng-model="unbanName" placeholder="Unban Someone"><i class="fa fa-user-plus"></i>
+        </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,8 @@ function(user, $routeParams, $location ,$scope, socket){
   if(!user.isLogged){
     $location.url('/login');
   }
-
+  $scope.me = user.username;
+  $scope.unbanName = '';
   $scope.messageBox = document.getElementById('messageBox');
   $scope.$watch(function(){
     return $scope.messageBox.scrollHeight;
@@ -30,8 +31,26 @@ function(user, $routeParams, $location ,$scope, socket){
       });
     }
   });
-  /* Element.
-  */
+  /* conditionals <- */
+  $scope.userIsOp = function(name) {
+    //don't allow operations on undefined .
+    if($scope.room.ops){
+      return (Object.keys($scope.room.ops).indexOf(name) !== -1);
+    }
+  };
+
+  $scope.canKickOrBan = function(name){
+    if(!$scope.userIsOp(user.username)){
+      //user is not op. no permis.
+      return false;
+    }else if($scope.userIsOp(name)){
+      //user cannot ban another op.
+      return false;
+    }
+    //user can kick, ban or op 'name'
+    return true;
+  };
+  /* actions*/
   $scope.sendMessage = function(){
     if($scope.message !== ''){
       socket.emit('sendmsg', {roomName: $scope.roomName, msg: $scope.message});
@@ -45,9 +64,9 @@ function(user, $routeParams, $location ,$scope, socket){
         user : userName ,
         room : $scope.roomName
       };
-      socket.emit('kickuser', kickObj , function(accepted){
+      socket.emit('kick', kickObj , function(accepted){
         if(accepted){
-          socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: userName+ ' has been kicked from from this room by ' + user});
+          socket.emit('sendmsg', {roomName: $scope.roomName, msg: userName + ' has been kicked from from this room by ' + user.username});
         }
       });
   };
@@ -61,30 +80,27 @@ function(user, $routeParams, $location ,$scope, socket){
     console.log(banObj);
     socket.emit('ban', banObj, function(accepted){
       if(accepted){
-        console.log("socket emited and was accepted");
-        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg: userName + ' has been banned from from this room by ' + user});
-      }
-      else{
-        console.log("not accepted");
+        socket.emit('sendmsg' ,{roomName: $scope.roomName, msg: userName + ' has been banned from from this room by ' + user.username});
       }
     });
   };
   /* op function to unban user*/
-  $scope.unbanUser = function(userName){
+  $scope.unbanUser = function(){
+    var unbanName = $scope.unbanName;
     var unbanobj =    {
-      user :userName,
+      user :unbanName,
       room : $scope.roomName
     };
     socket.emit('unbanuser', unbanobj , function(accepted){
       if(accepted){
-        socket.emit('sendmsg' ,{roomname: $scope.roomName, msg:userName + ' has been unbanned from from this room by ' + user});
+        socket.emit('sendmsg', {roomName : $scope.roomName, msg : unbanName + ' has been unbanned from from this room by ' + user.username});
       }
     });
   };
   /* op function to op user*/
-  $scope.opUser = function(userName){
+  $scope.opUser = function(name){
       var opobj = {
-        user: userName,
+        user: name,
         room : $scope.roomName
       };
       socket.emit('op', opobj , function(accepted){
@@ -95,9 +111,9 @@ function(user, $routeParams, $location ,$scope, socket){
           }
       });
   };
-  $scope.deop = function(userName){
+  $scope.deop = function(name){
     var deopobj = {
-      name : userName,
+      name : name,
       room : $scope.roomName
     };
     socket.emit('deop' , deopobj , function(accepted){
@@ -126,6 +142,11 @@ function(user, $routeParams, $location ,$scope, socket){
     if($scope.roomName === room){
       //message is meant for this room.
       $scope.topic = topic;
+    }
+  });
+  socket.on('kicked', function(room, kickedUser, kickerName){
+    if(room === $scope.roomName && kickedUser === user.username){
+      $location.url('/roomlist');
     }
   });
   socket.on('banned' , function(room , banName , opName){
