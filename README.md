@@ -14,6 +14,7 @@
 ```
 7. Run http server from the folder that contains index.html
 8. Access The project via http://localhost:8000
+
 ## Server Setup
 ```bash
 $ cd server/
