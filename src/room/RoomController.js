@@ -36,7 +36,26 @@ function(user, $routeParams, $location ,$scope, socket){
       return (Object.keys($scope.room.ops).indexOf(name) !== -1);
     }
   };
-
+  $scope.canOp = function (name){
+    //you cannot op an allready-op user.
+    if($scope.userIsOp(name)){return false; }
+    //you cannot op if you yourself are not op
+    if(!$scope.userIsOp(user.username)){ return false; }
+    //you cannot op yourself
+    else if(name === user.username){ return false; }
+    //you may op.
+    return true;
+  };
+  $scope.canDeop = function(name){
+    //if name is not op return false
+    if(!$scope.userIsOp(name)){ return false; }
+    //if user is not op return false.
+    else if(!$scope.userIsOp(user.username)){ return false; }
+    //cannot op or deop yourself.
+    else if(name === user.username){ return false; }
+    //user is op, and name is op.
+    return true;
+  };
   $scope.canKickOrBan = function(name){
     if(!$scope.userIsOp(user.username)){
       //user is not op. no permis.
@@ -103,22 +122,19 @@ function(user, $routeParams, $location ,$scope, socket){
       };
       socket.emit('op', opobj , function(accepted){
           if(accepted){
-            ///
-            /*TODO: send private message to the user that was oped*/
-            ///
+
           }
       });
   };
   $scope.deop = function(name){
+    console.log(name);
     var deopobj = {
-      name : name,
+      user : name,
       room : $scope.roomName
     };
     socket.emit('deop' , deopobj , function(accepted){
       if(accepted){
-        //
-        // TODO semd pirvate message to the user who was deoped
-        //
+
       }
     });
   };

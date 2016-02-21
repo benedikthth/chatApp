@@ -10,14 +10,15 @@
     <div class="col-xs-2">
       <h3>Users</h3>
       <ul>
-        <li ng-repeat="chatter in room.userList">
-          {{chatter}}
-          <div ng-if="canKickOrBan(chatter)">
-            <i class="fa fa-hand-o-left" ng-click="kickUser(chatter)"></i>
-            <i class="fa fa-ban" ng-click="banUser(chatter)"></i>
-            <!--
-            <intput type="button" value="Op user" ng-click="opUser(chatter)"></input>
-            -->
+        <li ng-repeat="chatter in room.userList" ng-class="{ opUser: userIsOp(chatter) }">
+          <span>
+            {{chatter}}
+          </span>
+          <div>
+            <i ng-if="canKickOrBan(chatter)" title="Kick User" class="fa fa-hand-o-left toolTip" ng-click="kickUser(chatter)"></i>
+            <i ng-if="canKickOrBan(chatter)" title="Ban User" class="fa fa-ban toolTip" ng-click="banUser(chatter)"></i>
+            <i ng-if="canOp(chatter)" title="Op User" class = "toolTip fa fa-hand-spock-o" ng-click="opUser(chatter)" ></i>
+            <i ng-if="canDeop(chatter)" title="De-op user" class=" toolTip fa fa-thumbs-o-down" ng-click="deop(chatter)"></i>
           </div>
         </li>
       </ul>
