@@ -1,11 +1,11 @@
 var chatApp = angular.module("chatApp", ['ngRoute']);
-chatApp.config(['$routeProvider', function($routeProvider){
-  $routeProvider.
-  when( '/login', {
+chatApp.config(['$routeProvider', function ($routeProvider) { "use strict";
+  $routeProvider
+  .when( '/login', {
     templateUrl: 'src/login/login.html',
     controller: 'loginController'
-  }).
-  when('/roomlist', {
+  })
+  .when('/roomlist', {
     templateUrl: 'src/roomList/roomList.html',
     controller: 'roomListController'
   }).

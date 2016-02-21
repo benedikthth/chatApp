@@ -13,9 +13,8 @@
         <li ng-repeat="chatter in room.userList">
           {{chatter}}
           <div ng-if="canKickOrBan(chatter)">
-            <i class="fa fa-ban" ng-click="kickUser(chatter)"></i></input>
-
-            <i class"fa fa-times-circle" ng-click="banUser(chatter)"></i>
+            <i class="fa fa-hand-o-left" ng-click="kickUser(chatter)"></i>
+            <i class="fa fa-ban" ng-click="banUser(chatter)"></i>
             <!--
             <intput type="button" value="Op user" ng-click="opUser(chatter)"></input>
             -->
@@ -51,7 +50,8 @@
       </div>
         <div ng-if="userIsOp(me)">
           <!-- TODO: implement unbanning user! -->
-          <input type="text" name="name" ng-model="unbanName" placeholder="Unban Someone"><i class="fa fa-user-plus"></i>
+          <input type="text" name="name" ng-model="unbanName" placeholder="Unban Someone">
+          <button type="button" name="button" ng-click="unbanUser(unbanName)"> <i class="fa fa-user-plus" ></i></button>
         </div>
     </div>
   </div>

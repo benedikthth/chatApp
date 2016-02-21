@@ -1,16 +1,22 @@
 # ChatApp
 ## Instructions to Run:
 1. $ git clone -> repository!
-2. $ npm install
-3. $ bower install
-4. $ gulp build
-5. $ gulp watch (only for developement)
-6. $ node server/server.js
-7. start a http server
-8. ???
-9. profit
-## How to Set up server for WEBSOCKET AWESOMENESS!
-1. $ cd server/
-2. $ npm install (it's good to fucking make the fuck sure you're using a recent fucking version of fucking socket.io)
-3. ????
-4. fucking porrrrrrrrrrfgit
+2.
+'''bash
+ $ npm install
+ $ bower install
+ $ gulp build
+'''
+
+6.
+'''bash
+ $ node server/server.js
+'''
+7. Run http server from the folder that contains index.html
+8. Access The project via http://localhost:8000
+## Server Setup
+'''bash
+$ cd server/
+$ npm install
+$ node chatserver.js
+'''

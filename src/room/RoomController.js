@@ -5,7 +5,6 @@ function(user, $routeParams, $location ,$scope, socket){
     $location.url('/login');
   }
   $scope.me = user.username;
-  $scope.unbanName = '';
   $scope.messageBox = document.getElementById('messageBox');
   $scope.$watch(function(){
     return $scope.messageBox.scrollHeight;
@@ -14,7 +13,6 @@ function(user, $routeParams, $location ,$scope, socket){
   });
 
   $scope.messages = {};
-  $scope.newMessage = '';
   $scope.room = {};
   //Request to join room
   socket.emit('joinroom', { room: $routeParams.id, pass:'' }, function(success, reason){
@@ -85,15 +83,15 @@ function(user, $routeParams, $location ,$scope, socket){
     });
   };
   /* op function to unban user*/
-  $scope.unbanUser = function(){
-    var unbanName = $scope.unbanName;
+  $scope.unbanUser = function(name){
+    console.log('unbanning' + name);
     var unbanobj =    {
-      user :unbanName,
+      user :name,
       room : $scope.roomName
     };
-    socket.emit('unbanuser', unbanobj , function(accepted){
+    socket.emit('unban', unbanobj , function(accepted){
       if(accepted){
-        socket.emit('sendmsg', {roomName : $scope.roomName, msg : unbanName + ' has been unbanned from from this room by ' + user.username});
+        socket.emit('sendmsg', {roomName : $scope.roomName, msg : name + ' has been unbanned from from this room by ' + user.username});
       }
     });
   };
@@ -152,6 +150,7 @@ function(user, $routeParams, $location ,$scope, socket){
   socket.on('banned' , function(room , banName , opName){
   //  console.log(" banName " + banName + " user: " + user.username);
     if(user.username == banName){
+      alert('You Have been banned.');
       $location.url('/roomlist');
     }
   });
