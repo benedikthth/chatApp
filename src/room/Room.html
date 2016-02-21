@@ -14,8 +14,9 @@
           {{chatter}}
           <div ng-if="canKickOrBan(chatter)">
             <i class="fa fa-ban" ng-click="kickUser(chatter)"></i></input>
+
+            <i class"fa fa-times-circle" ng-click="banUser(chatter)"></i>
             <!--
-            <input type="button" value="ban user" ng-click="banUser(chatter)"> </input>
             <intput type="button" value="Op user" ng-click="opUser(chatter)"></input>
             -->
           </div>
@@ -28,15 +29,20 @@
           <p>
             Messages!
           </p>
-          <div ng-repeat="message in messages">
-            <p>
-              <strong>{{message.nick}} :</strong>
-              <p class="text-right">{{message.timestamp}}</p>
-            </p>
-            <blockquote>
-              {{message.message}}
-            </blockquote>
+
+          <div class="pad messageContainer" ng-repeat="message in messages">
+            <div ng-class="{ owned: me == message.nick}">
+              <div class="messageHeader">
+                <span> {{message.nick}} </span>
+                <span class="text-right"> {{message.timestamp}} </span>
+              </div>
+              <div class="messageText">
+                {{message.message}}
+              </div>
+            </div>
           </div>
+
+
         </div>
       </div>
       <div>

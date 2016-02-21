@@ -1,0 +1,41 @@
+#messageBox {
+  display: block;
+}
+.messageContainer {
+  width: 100%;
+  display: inline-block;
+}
+
+.pad {
+  padding: 3px 0;
+}
+
+
+
+div.messageContainer div{
+  background-color: #BBB;
+  border-radius: 30px;
+  display: inline-block;
+  width: 100%;
+}
+
+div.messageContainer div.owned {
+  background-color: #DDD;
+}
+div.messageContainer div.owned div{
+  background-color: inherit;
+}
+
+.text-right {
+  margin-left: 30px;
+}
+
+.message .messageHeader {
+  margin-left: 30px;
+}
+.message .messageText {
+  margin-left: 30px;
+  width: 90%;
+  overflow: visible;
+  word-wrap: break-word;
+}
