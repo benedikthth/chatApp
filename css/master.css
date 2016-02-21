@@ -39,3 +39,11 @@ div.messageContainer div.owned div{
   overflow: visible;
   word-wrap: break-word;
 }
+
+
+/* end of theft */
+
+.opUser span:after {
+  font-family: FontAwesome;
+  content: "\f005";
+}

@@ -89,12 +89,10 @@ function(user, $routeParams, $location ,$scope, socket){
   };
   /* op function to ban user*/
   $scope.banUser = function(userName){
-    console.log("got in the function");
     var banObj = {
       user: userName,
       room : $scope.roomName
     };
-    console.log(banObj);
     socket.emit('ban', banObj, function(accepted){
       if(accepted){
         socket.emit('sendmsg' ,{roomName: $scope.roomName, msg: userName + ' has been banned from from this room by ' + user.username});
@@ -103,7 +101,6 @@ function(user, $routeParams, $location ,$scope, socket){
   };
   /* op function to unban user*/
   $scope.unbanUser = function(name){
-    console.log('unbanning' + name);
     var unbanobj =    {
       user :name,
       room : $scope.roomName
@@ -127,7 +124,6 @@ function(user, $routeParams, $location ,$scope, socket){
       });
   };
   $scope.deop = function(name){
-    console.log(name);
     var deopobj = {
       user : name,
       room : $scope.roomName
@@ -164,7 +160,6 @@ function(user, $routeParams, $location ,$scope, socket){
     }
   });
   socket.on('banned' , function(room , banName , opName){
-  //  console.log(" banName " + banName + " user: " + user.username);
     if(user.username == banName){
       alert('You Have been banned.');
       $location.url('/roomlist');
@@ -183,7 +178,7 @@ function(user, $routeParams, $location ,$scope, socket){
           //todo: inform users that {{username}} has joined
           break;
         default:
-          console.log('wat');
+          //oops what... 
           break;
       }
     }
