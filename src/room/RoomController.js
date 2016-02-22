@@ -74,6 +74,9 @@ function(user, $routeParams, $location ,$scope, socket){
       $scope.message = '';
     }
   };
+  $scope.leaveRoom = function(){
+    $location.url('/roomlist');
+  };
   /* op functions */
   /* op function Kick user*/
   $scope.kickUser = function(userName){
@@ -178,7 +181,7 @@ function(user, $routeParams, $location ,$scope, socket){
           //todo: inform users that {{username}} has joined
           break;
         default:
-          //oops what... 
+          //oops what...
           break;
       }
     }
